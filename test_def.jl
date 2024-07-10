@@ -1,6 +1,4 @@
-include("src/MazeGeneration.jl")  # path to our module
-
-using .MazeGeneration               # import our module
+include("src/solve.jl")             # immport solve.jl
 using Test                          # import julia's test module
 
 @testset "Struct Tests" begin                                    # STRUCT TESTS
@@ -25,8 +23,8 @@ end
 @testset "Function Tests" begin                                         # FUNCTION TESTS
 
     @testset "maze" begin                                               # testing maze
-        maze_large = maze(11,8)
-        @test size(maze_large.nodes) == (11,8)
+        maze1 = maze(11,8)
+        @test size(maze1.nodes) == (11,8)
     end
 
     @testset "solve" begin                                              # testing solve
@@ -36,16 +34,17 @@ end
     end
 
     @testset "visualize" begin                                          # testing visualize
-        maze_small = maze(5, 5)
-        solved_maze_small = solve(maze_small)
-        
+        maze1 = maze(5, 5)
+
         # capture output
-        stdout = stdout                     # standard output stream.
-        redirect_stdout()                   # Any printed-output will be redirected into buffer
-        visualize(solved_maze_small)
-        output = redirect_stdout(stdout)    # redirect it back for printing the output
-        
+        io = IOBuffer()                     # standard output stream.
+        redirect_stdout(io) do              # Any printed-output will be redirected into buffer
+            visualize(solve(maze1))
+        end
+        output = String(take!(io))          # convert IOBuffer to string
+
         # output should contain ██ and ░░
         @test occursin("██", output)
         @test occursin("░░", output)
     end
+end
