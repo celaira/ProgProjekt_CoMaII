@@ -1,4 +1,4 @@
-include("src/solve.jl")             # immport solve.jl
+include("src/visualize.jl")             # immport solve.jl
 using Test                          # import julia's test module
 
 @testset "Struct Tests" begin                                    # STRUCT TESTS

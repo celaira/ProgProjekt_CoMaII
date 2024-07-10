@@ -34,7 +34,7 @@ function visualize(maze::Maze)
                     else
                         output*=blank
                     end
-                    if n[i,j][2]==nothing
+                    if n[i,j][2]===nothing
                         output*=wall
                     elseif (n[i,j][2] in s) & ([j,i] in s)
                         output*=path
@@ -46,7 +46,7 @@ function visualize(maze::Maze)
 
             else
                 for j=1:width
-                    if n[i,j][3]==nothing
+                    if n[i,j][3]===nothing
                         output*=wall
                     elseif (n[i,j][3] in s) & ([j,i] in s)
                         
