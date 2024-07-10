@@ -1,1 +1,1 @@
-#here should be the tests
+include("test_def.jl")
