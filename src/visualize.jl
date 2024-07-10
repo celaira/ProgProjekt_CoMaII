@@ -16,7 +16,11 @@ function visualize(matrix::Matrix{Node}, Path::Union{Vector{Node},Nothing})
     path = "░░"
     blank = "  "
     output = ""
-    s=Vector{Int}[node.key for node in Path]
+    if Path===nothing
+        s=[]
+    else
+        s=Vector{Int}[node.key for node in Path]
+    end
 
     n=Vector{Union{Vector{Int},Nothing}}[[node.neighbors[i].key for i=1:4] for node in matrix]
     for node in n
@@ -69,7 +73,6 @@ function visualize(matrix::Matrix{Node}, Path::Union{Vector{Node},Nothing})
         end         
         output*="\n"
     end
-
     return output
 end
 
