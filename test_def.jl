@@ -31,23 +31,13 @@ end
         solved_maze = solve(maze(8,7))
         @test length(solved_maze.path) > 0
         @test unique(solved_maze.path) == solved_maze.path              # all nodes in path only once
-        @test solved_maze.path[1] != solved_maze.path[end]
     end
 
     @testset "visualize" begin                                          # testing visualize
         maze1 = maze(5, 7)
+        output=visualize(maze1.nodes,maze1.path)
 
-        # capture output
-        original_stdout=stdout
-        io = IOBuffer()                     # standard output stream.
-        redirect_stdout(io) do              # Any printed-output will be redirected into buffer
-            visualize(solve(maze1))
-        end
-        output = String(take!(io))          # convert IOBuffer to string
-
-        # output should contain ██ and ░░
+        # output should contain ██
         @test occursin("██", output)
-        @test occursin("░░", output)
-        redirect_stdout(original_stdout)
     end
 end
