@@ -1,16 +1,24 @@
-include("solve.jl")
+include("Node.jl")
+
+MazeViz=Nothing
+
+mutable struct Maze
+    nodes::Matrix{Node}
+    visual::Union{MazeViz,Nothing}
+    path::Union{Vector{Node},Nothing}
+end
 
 # Task 4
-function visualize(maze::Maze)
-    width = size(maze.nodes)[2]
-    height = size(maze.nodes)[1]
+function visualize(matrix::Matrix{Node}, Path::Union{Vector{Node},Nothing})
+    width = size(matrix)[2]
+    height = size(matrix)[1]
     wall = "██"
     path = "░░"
     blank = "  "
     output = ""
-    s=Vector{Int}[node.key for node in maze.path]
+    s=Vector{Int}[node.key for node in Path]
 
-    n=Vector{Union{Vector{Int},Nothing}}[[node.neighbors[i].key for i=1:4] for node in maze.nodes]
+    n=Vector{Union{Vector{Int},Nothing}}[[node.neighbors[i].key for i=1:4] for node in matrix]
     for node in n
         for i=1:4
             if node[i]==[0] || node[i]==[-1]
@@ -62,12 +70,9 @@ function visualize(maze::Maze)
         output*="\n"
     end
 
-    print(output)#,"\n",s,"\n",n)
+    return output
 end
-#=
-Testinstanzen:
 
-test1 = maze(2,2)
-println(test1)
-println(solve(test1)) 
-=#
+function Base.show(io::IO, maze::Maze)
+    print(visualize(maze.nodes,maze.path))
+end

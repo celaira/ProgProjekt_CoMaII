@@ -1,4 +1,5 @@
-include("structs.jl")
+include("Node.jl")
+include("visualize.jl")
 
 # task 3
 function maze(height::Int, width::Int)::Maze
