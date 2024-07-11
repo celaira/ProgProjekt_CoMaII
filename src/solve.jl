@@ -10,9 +10,9 @@ function solve(maze::Maze)::Maze
     width = size(maze.nodes)[2]
     height = size(maze.nodes)[1] 
     start=rand(1:length(maze.nodes))        # randomize start-point
-    #start=width
+    #start=
     ende=rand(1:length(maze.nodes))         # randomize end-point
-    #ende=height*(width-1)+1
+    #ende=
     node_index_map = Dict{Int, Int}(i=>-1 for i=1:width*height)         # dictionary to track first occurrence index of each node key
 
     while start!=ende

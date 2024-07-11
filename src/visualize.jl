@@ -1,6 +1,6 @@
 include("Node.jl")
 
-mutable struct MazeViz
+mutable struct MazeViz                  # not used in our project, unneccessary
     output::Union{String,Nothing}
 end
 
@@ -78,6 +78,6 @@ function visualize(matrix::Matrix{Node}, Path::Union{Vector{Node},Nothing}) # Fu
     return output
 end
 
-function Base.show(io::IO, maze::Maze)
+function Base.show(io::IO, maze::Maze)          # automatic visualization of Maze's with IO-Buffer
     print(visualize(maze.nodes,maze.path))
 end
